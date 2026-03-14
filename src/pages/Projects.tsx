@@ -1,28 +1,39 @@
 import { motion } from 'framer-motion';
-import projectHybrid from '../../public/assets/project-hybrid.jpg';
-import projectCad from '../../public/assets/project-cad.jpg';
-import projectJet from '../../public/assets/project-jet.jpg';
+import p1 from '../../public/assets/project/p1.jpg';
+import p2 from '../../public/assets/project/p2.jpg';
+import p3 from '../../public/assets/project/p3.jpg';
+import p4 from '../../public/assets/project/p4.jpg';
+import p5 from '../../public/assets/project/p5.jpg';
+import p6 from '../../public/assets/project/p6.jpg';
+import p7 from '../../public/assets/project/p7.jpg';
+import p8 from '../../public/assets/project/p8.jpg';
+import p9 from '../../public/assets/project/p9.jpg';
+import p10 from '../../public/assets/project/p10.jpg';
+import p13 from '../../public/assets/project/p13.jpg';
+import p11 from '../../public/assets/project/p11.jpg';
+import p12 from '../../public/assets/project/p12.jpg';
+
+
 
 interface Project {
   title: string;
-  description: string;
   image: string;
   proposedBy: string;
 }
 
 const projects: Project[] = [
-  { title: 'Hybrid Vehicle', description: 'A next-gen hybrid electric vehicle prototype for sustainable mobility.', image: projectHybrid, proposedBy: 'Dr. Rajesh Kumar' },
-  { title: 'CAD Lab', description: 'Advanced 3D modeling and simulation research facility.', image: projectCad, proposedBy: 'Prof. Anil Sharma' },
-  { title: 'Jet Propulsion', description: 'High-performance water jet propulsion system design.', image: projectJet, proposedBy: 'Dr. Suresh Mehta' },
-  { title: 'Solar Powered Cart', description: 'An energy-efficient solar-powered transportation cart for campus use.', image: projectHybrid, proposedBy: 'Prof. Vikram Singh' },
-  { title: 'Drone Prototype', description: 'Custom UAV built for aerial surveillance and payload delivery.', image: projectCad, proposedBy: 'Dr. Priya Nair' },
-  { title: 'Smart Suspension', description: 'Adaptive suspension system using real-time sensor feedback.', image: projectJet, proposedBy: 'Prof. Manish Verma' },
-  { title: 'Wind Turbine Model', description: 'Small-scale wind turbine optimized for low-wind regions.', image: projectHybrid, proposedBy: 'Dr. Ramesh Gupta' },
-  { title: 'Robotic Arm', description: 'A 6-DOF robotic arm for industrial automation demonstrations.', image: projectCad, proposedBy: 'Prof. Sandeep Rao' },
-  { title: 'Heat Exchanger', description: 'Compact heat exchanger design for improved thermal efficiency.', image: projectJet, proposedBy: 'Dr. Kavita Joshi' },
-  { title: 'Pneumatic Press', description: 'High-force pneumatic press for manufacturing process simulation.', image: projectHybrid, proposedBy: 'Prof. Deepak Tiwari' },
-  { title: 'Go-Kart Design', description: 'Custom-built go-kart chassis optimized for speed and handling.', image: projectCad, proposedBy: 'Dr. Amit Chauhan' },
-  { title: 'Hydraulic Lifter', description: 'Portable hydraulic lifting mechanism for workshop applications.', image: projectJet, proposedBy: 'Prof. Neha Kulkarni' },
+  { title: 'Flywheel Battery', image: p1, proposedBy: 'Vansh Aggarwal' },
+  { title: 'Maglev Wind Turbine', image: p2, proposedBy: 'Harish Kumar' },
+  { title: 'Automatic Dishwasher', image: p3, proposedBy: 'Asif Khan' },
+  { title: 'Vertical Take Off and Landing', image: p5, proposedBy: 'Charu Chauhan' },
+  { title: 'Vibration to Electrical Energy', image: p6, proposedBy: 'Nishant Prakhar' },
+  { title: 'Ozzy Aura', image: p7, proposedBy: 'Saksham Sood' },
+  { title: 'Autonomous Parking System', image: p8, proposedBy: 'Saloni Sharma' },
+  { title: 'Circulation Aid', image: p9, proposedBy: 'Saloni Sharma' },
+  { title: 'Emaluation (Electromagnetic Launcher)', image: p10, proposedBy: 'Saksham Sood' },
+  { title: 'Unmanned Group Vehicle', image: p13, proposedBy: 'Peeyush, Prabhat, Sangam' },
+  { title: 'Ionic Thruster', image: p11, proposedBy: 'Shwetansh, Sparsh' },
+  { title: 'Tree Power', image: p12, proposedBy: 'Anjani, Sakshi' },
 ];
 
 const PageHeading = ({ title }: { title: string }) => (
@@ -62,8 +73,8 @@ const PageHeading = ({ title }: { title: string }) => (
 const pageTransition = {
   initial: { opacity: 0, scale: 0.95 },
   animate: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 1.05 },
-  transition: { duration: 0.5 },
+  exit: { opacity: 0 },
+  transition: { duration: 0.4 },
 };
 
 const Projects = () => {
@@ -90,8 +101,8 @@ const Projects = () => {
               {/* Top shimmer */}
               <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent z-10" />
 
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
+              {/* Image — increased height to fill space left by removed description */}
+              <div className="relative h-72 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -120,10 +131,6 @@ const Projects = () => {
               <div className="p-5 relative">
                 {/* Left accent */}
                 <div className="absolute top-4 bottom-4 left-0 w-0.5 bg-gradient-to-b from-transparent via-blue-500/35 to-transparent rounded-full" />
-
-                <p className="text-sm text-slate-400 leading-relaxed text-justify mb-4">
-                  {project.description}
-                </p>
 
                 {/* Divider */}
                 <div className="h-px bg-gradient-to-r from-transparent via-slate-700/40 to-transparent mb-3" />

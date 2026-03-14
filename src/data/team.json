@@ -1,410 +1,252 @@
 {
   "year1": [
     {
-      "name": "Lakshya Chauhan",
+      "name": "Abhay Prajapati",
       "linkedin": "#",
-      "image": "/assets/team/year1/1.jpg"
+      "image": "/team/year1/abhay.jpg"
+    },
+    { "name": "Aman Kumar", "linkedin": "#", "image": "/team/year1/aman.jpg" },
+    {
+      "name": "Arpit Singh",
+      "linkedin": "#",
+      "image": "/team/year1/arpit.jpg"
+    },
+    {
+      "name": "Ayushi Shukla",
+      "linkedin": "#",
+      "image": "/team/year1/ayushi.jpg"
+    },
+    {
+      "name": "Keshav Rana",
+      "linkedin": "#",
+      "image": "/team/year1/keshav.jpg"
+    },
+    {
+      "name": "Manavi Y.Ahire",
+      "linkedin": "#",
+      "image": "/team/year1/manavi.jpg"
+    },
+    { "name": "Manya", "linkedin": "#", "image": "/team/year1/manya.jpg" },
+    {
+      "name": "Mohd Mehfooz Khan",
+      "linkedin": "#",
+      "image": "/team/year1/mehfooz.jpg"
+    },
+    {
+      "name": "Pragya Vashisht",
+      "linkedin": "#",
+      "image": "/team/year1/pragya.jpg"
+    },
+    {
+      "name": "Shivanshu Lakhanpal",
+      "linkedin": "#",
+      "image": "/team/year1/shivanshu.jpg"
+    },
+    {
+      "name": "Shrijan Guleria",
+      "linkedin": "#",
+      "image": "/team/year1/shrijan.jpg"
+    },
+    {
+      "name": "Siddhant Kapoor",
+      "linkedin": "#",
+      "image": "/team/year1/siddhant.jpg"
+    },
+    {
+      "name": "Swastik Verma",
+      "linkedin": "#",
+      "image": "/team/year1/swastik.jpg"
+    },
+    {
+      "name": "Vanshika",
+      "linkedin": "#",
+      "image": "/team/year1/vanshika.jpg"
+    },
+    {
+      "name": "Vishal Kumar",
+      "linkedin": "#",
+      "image": "/team/year1/vishal.jpg"
+    },
+    { "name": "Yash Pathak", "linkedin": "#", "image": "/team/year1/yash.jpg" }
+  ],
+
+  "year2": [
+    {
+      "name": "Amrit Singh Naryal",
+      "linkedin": "#",
+      "image": "/team/year2/amrit.jpg"
+    },
+    {
+      "name": "Anjani Sharma",
+      "linkedin": "#",
+      "image": "/team/year2/anjani.jpg"
+    },
+    {
+      "name": "Anand Saini",
+      "linkedin": "#",
+      "image": "/team/year2/anand.jpg"
+    },
+    {
+      "name": "Arshita Dhadwal",
+      "linkedin": "#",
+      "image": "/team/year2/arshita.jpg"
+    },
+    {
+      "name": "Fateen Anwar",
+      "linkedin": "#",
+      "image": "/team/year2/fateen.jpg"
+    },
+    {
+      "name": "Hardik Gupta",
+      "linkedin": "#",
+      "image": "/team/year2/hardik.jpg"
+    },
+    {
+      "name": "Hiten Sharma",
+      "linkedin": "#",
+      "image": "/team/year2/hiten.jpg"
+    },
+    { "name": "Kriti", "linkedin": "#", "image": "/team/year2/kriti.jpg" },
+    {
+      "name": "Mohit Maurya",
+      "linkedin": "#",
+      "image": "/team/year2/mohit.jpg"
+    },
+    {
+      "name": "Mukesh Kumar",
+      "linkedin": "#",
+      "image": "/team/year2/mukesh.jpg"
+    },
+    {
+      "name": "Prachetus Sood",
+      "linkedin": "#",
+      "image": "/team/year2/prachetus.jpg"
+    },
+    {
+      "name": "Rohit Grover",
+      "linkedin": "#",
+      "image": "/team/year2/rohit.jpg"
+    },
+    {
+      "name": "Sakshi Shreyaskar",
+      "linkedin": "#",
+      "image": "/team/year2/sakshi.jpg"
+    },
+    { "name": "Tanishk", "linkedin": "#", "image": "/team/year2/tanishk.jpg" }
+  ],
+
+  "year3": [
+    {
+      "name": "Anshvi Saini",
+      "linkedin": "#",
+      "image": "/team/year3/anshvi.jpg"
+    },
+    { "name": "Piyush", "linkedin": "#", "image": "/team/year3/piyush.jpg" },
+    {
+      "name": "Prabhat Singh",
+      "linkedin": "#",
+      "image": "/team/year3/prabhat.jpg"
+    },
+    {
+      "name": "Sangam Thakur",
+      "linkedin": "#",
+      "image": "/team/year3/sangam.jpg"
+    },
+    { "name": "Shivam", "linkedin": "#", "image": "/team/year3/shiva.jpg" },
+    {
+      "name": "Shivam Namdev",
+      "linkedin": "#",
+      "image": "/team/year3/shivam.jpg"
+    },
+    {
+      "name": "Shriya",
+      "linkedin": "#",
+      "image": "/team/year3/shriya.jpg"
+    },
+    {
+      "name": "Shwetansh",
+      "linkedin": "#",
+      "image": "/team/year3/shwetansh.jpg"
+    },
+    {
+      "name": "Sparsh Sharma",
+      "linkedin": "#",
+      "image": "/team/year3/sparsh.jpg"
+    },
+    {
+      "name": "Suhani Sharma",
+      "linkedin": "#",
+      "image": "/team/year3/suhani.jpg"
+    },
+    
+    {
+      "name": "Vishal Vaishnav",
+      "linkedin": "#",
+      "image": "/team/year3/vishal.jpg"
+    },
+    { "name": "Vikas", "linkedin": "#", "image": "/team/year3/vikas.jpg" },
+    {
+      "name": "Vikash Kumar",
+      "linkedin": "#",
+      "image": "/team/year3/vikash.jpg"
+    }
+  ],
+
+  "year4": [
+    {
+      "name": "Abhay Maurya",
+      "linkedin": "https://www.linkedin.com/in/abhay-maurya-18b84b248",
+      "image": "/team/year4/abhay.jpg"
+    },
+    {
+      "name": "Ekta Sanyal",
+      "linkedin": "https://www.linkedin.com/in/ekta-sanyal-a5502525a",
+      "image": "/team/year4/ekta.jpg"
+    },
+    {
+      "name": "Lakshya Chauhan",
+      "linkedin": "https://www.linkedin.com/in/lakshya-chauhan-b55a302ab",
+      "image": "/team/year4/lakshya.jpg"
+    },
+    {
+      "name": "Nikhil Kumar",
+      "linkedin": "https://www.linkedin.com/in/nikhil-kumar-910143289",
+      "image": "/team/year4/nikhil.jpg"
+    },
+    {
+      "name": "Nishant Prakhar",
+      "linkedin": "https://www.linkedin.com/in/nishant-prakhar",
+      "image": "/team/year4/nishant.jpg"
+    },
+    {
+      "name": "Piyush Kesari",
+      "linkedin": "https://www.linkedin.com/in/piyush-keshri-22156025a",
+      "image": "/team/year4/piyush.jpg"
+    },
+    {
+      "name": "Rajendra Kumar",
+      "linkedin": "https://www.linkedin.com/in/",
+      "image": "/team/year4/rajendra.jpg"
     },
     {
       "name": "Saksham Sood",
-      "linkedin": "#",
-      "image": "/assets/team/year1/2.jpg"
+      "linkedin": "https://www.linkedin.com/in/saksham-sood-b3031716b",
+      "image": "/team/year4/saksham.jpg"
     },
     {
-      "name": "Rahul Sharma",
-      "linkedin": "#",
-      "image": "/assets/team/year1/3.jpg"
+      "name": "Saloni Sharma",
+      "linkedin": "https://www.linkedin.com/in/saloni-sharma-967787256",
+      "image": "/team/year4/saloni.jpg"
     },
     {
-      "name": "Aryan Gupta",
-      "linkedin": "#",
-      "image": "/assets/team/year1/4.jpg"
+      "name": "Vijeta Sharma",
+      "linkedin": "https://www.linkedin.com/in/vijeta-sharma-678a52288",
+      "image": "/team/year4/vijeta.jpg"
     },
     {
-      "name": "Priya Singh",
-      "linkedin": "#",
-      "image": "/assets/team/year1/5.jpg"
-    },
-    {
-      "name": "Rohan Verma",
-      "linkedin": "#",
-      "image": "/assets/team/year1/6.jpg"
-    },
-    {
-      "name": "Neha Patel",
-      "linkedin": "#",
-      "image": "/assets/team/year1/7.jpg"
-    },
-    {
-      "name": "Vikram Kumar",
-      "linkedin": "#",
-      "image": "/assets/team/year1/8.jpg"
-    },
-    {
-      "name": "Anjali Rani",
-      "linkedin": "#",
-      "image": "/assets/team/year1/9.jpg"
-    },
-    {
-      "name": "Amit Yadav",
-      "linkedin": "#",
-      "image": "/assets/team/year1/10.jpg"
-    },
-    {
-      "name": "Sneha Gupta",
-      "linkedin": "#",
-      "image": "/assets/team/year1/11.jpg"
-    },
-    {
-      "name": "Karan Malhotra",
-      "linkedin": "#",
-      "image": "/assets/team/year1/12.jpg"
-    },
-    {
-      "name": "Divya Sharma",
-      "linkedin": "#",
-      "image": "/assets/team/year1/13.jpg"
-    },
-    {
-      "name": "Sameer Khan",
-      "linkedin": "#",
-      "image": "/assets/team/year1/14.jpg"
-    },
-    {
-      "name": "Ravi Singh",
-      "linkedin": "#",
-      "image": "/assets/team/year1/15.jpg"
-    },
-    {
-      "name": "Pooja Devi",
-      "linkedin": "#",
-      "image": "/assets/team/year1/16.jpg"
-    },
-    {
-      "name": "Arjun Patel",
-      "linkedin": "#",
-      "image": "/assets/team/year1/17.jpg"
-    },
-    {
-      "name": "Meera Joshi",
-      "linkedin": "#",
-      "image": "/assets/team/year1/18.jpg"
-    },
-    {
-      "name": "Nikhil Rao",
-      "linkedin": "#",
-      "image": "/assets/team/year1/19.jpg"
-    },
-    {
-      "name": "Shreya Mishra",
-      "linkedin": "#",
-      "image": "/assets/team/year1/20.jpg"
-    }
-  ],
-  "year2": [
-    {
-      "name": "Priya Rani",
-      "linkedin": "#",
-      "image": "/assets/team/year2/1.jpg"
-    },
-    {
-      "name": "Arjun Singh",
-      "linkedin": "#",
-      "image": "/assets/team/year2/2.jpg"
-    },
-    {
-      "name": "Neha Gupta",
-      "linkedin": "#",
-      "image": "/assets/team/year2/3.jpg"
-    },
-    {
-      "name": "Rohan Verma",
-      "linkedin": "#",
-      "image": "/assets/team/year2/4.jpg"
-    },
-    {
-      "name": "Vikram Singh",
-      "linkedin": "#",
-      "image": "/assets/team/year2/5.jpg"
-    },
-    {
-      "name": "Anjali Sharma",
-      "linkedin": "#",
-      "image": "/assets/team/year2/6.jpg"
-    },
-    {
-      "name": "Rohit Kumar",
-      "linkedin": "#",
-      "image": "/assets/team/year2/7.jpg"
-    },
-    {
-      "name": "Sneha Patel",
-      "linkedin": "#",
-      "image": "/assets/team/year2/8.jpg"
-    },
-    {
-      "name": "Karan Malhotra",
-      "linkedin": "#",
-      "image": "/assets/team/year2/9.jpg"
-    },
-    {
-      "name": "Divya Rani",
-      "linkedin": "#",
-      "image": "/assets/team/year2/10.jpg"
-    },
-    {
-      "name": "Sameer Khan",
-      "linkedin": "#",
-      "image": "/assets/team/year2/11.jpg"
-    },
-    {
-      "name": "Amit Yadav",
-      "linkedin": "#",
-      "image": "/assets/team/year2/12.jpg"
-    },
-    {
-      "name": "Ravi Kumar",
-      "linkedin": "#",
-      "image": "/assets/team/year2/13.jpg"
-    },
-    {
-      "name": "Pooja Devi",
-      "linkedin": "#",
-      "image": "/assets/team/year2/14.jpg"
-    },
-    {
-      "name": "Arjun Patel",
-      "linkedin": "#",
-      "image": "/assets/team/year2/15.jpg"
-    },
-    {
-      "name": "Meera Joshi",
-      "linkedin": "#",
-      "image": "/assets/team/year2/16.jpg"
-    },
-    {
-      "name": "Nikhil Rao",
-      "linkedin": "#",
-      "image": "/assets/team/year2/17.jpg"
-    },
-    {
-      "name": "Shreya Mishra",
-      "linkedin": "#",
-      "image": "/assets/team/year2/18.jpg"
-    },
-    {
-      "name": "Rahul Gupta",
-      "linkedin": "#",
-      "image": "/assets/team/year2/19.jpg"
-    },
-    {
-      "name": "Simran Kaur",
-      "linkedin": "#",
-      "image": "/assets/team/year2/20.jpg"
-    }
-  ],
-  "year3": [
-    {
-      "name": "Vikram Singh",
-      "linkedin": "#",
-      "image": "/assets/team/year3/1.jpg"
-    },
-    {
-      "name": "Anjali Sharma",
-      "linkedin": "#",
-      "image": "/assets/team/year3/2.jpg"
-    },
-    {
-      "name": "Rohit Kumar",
-      "linkedin": "#",
-      "image": "/assets/team/year3/3.jpg"
-    },
-    {
-      "name": "Sneha Patel",
-      "linkedin": "#",
-      "image": "/assets/team/year3/4.jpg"
-    },
-    {
-      "name": "Karan Malhotra",
-      "linkedin": "#",
-      "image": "/assets/team/year3/5.jpg"
-    },
-    {
-      "name": "Divya Rani",
-      "linkedin": "#",
-      "image": "/assets/team/year3/6.jpg"
-    },
-    {
-      "name": "Sameer Khan",
-      "linkedin": "#",
-      "image": "/assets/team/year3/7.jpg"
-    },
-    {
-      "name": "Amit Yadav",
-      "linkedin": "#",
-      "image": "/assets/team/year3/8.jpg"
-    },
-    {
-      "name": "Ravi Kumar",
-      "linkedin": "#",
-      "image": "/assets/team/year3/9.jpg"
-    },
-    {
-      "name": "Pooja Devi",
-      "linkedin": "#",
-      "image": "/assets/team/year3/10.jpg"
-    },
-    {
-      "name": "Arjun Patel",
-      "linkedin": "#",
-      "image": "/assets/team/year3/11.jpg"
-    },
-    {
-      "name": "Meera Joshi",
-      "linkedin": "#",
-      "image": "/assets/team/year3/12.jpg"
-    },
-    {
-      "name": "Nikhil Rao",
-      "linkedin": "#",
-      "image": "/assets/team/year3/13.jpg"
-    },
-    {
-      "name": "Shreya Mishra",
-      "linkedin": "#",
-      "image": "/assets/team/year3/14.jpg"
-    },
-    {
-      "name": "Rahul Gupta",
-      "linkedin": "#",
-      "image": "/assets/team/year3/15.jpg"
-    },
-    {
-      "name": "Simran Kaur",
-      "linkedin": "#",
-      "image": "/assets/team/year3/16.jpg"
-    },
-    {
-      "name": "Deepak Singh",
-      "linkedin": "#",
-      "image": "/assets/team/year3/17.jpg"
-    },
-    {
-      "name": "Ritu Sharma",
-      "linkedin": "#",
-      "image": "/assets/team/year3/18.jpg"
-    },
-    {
-      "name": "Vishal Reddy",
-      "linkedin": "#",
-      "image": "/assets/team/year3/19.jpg"
-    },
-    {
-      "name": "Kavya Nair",
-      "linkedin": "#",
-      "image": "/assets/team/year3/20.jpg"
-    }
-  ],
-  "year4": [
-    {
-      "name": "Karan Malhotra",
-      "linkedin": "#",
-      "image": "../../public/assets/logo1.png"
-    },
-    {
-      "name": "Divya Rani",
-      "linkedin": "#",
-      "image": "/assets/team/year4/2.jpg"
-    },
-    {
-      "name": "Sameer Khan",
-      "linkedin": "#",
-      "image": "/assets/team/year4/3.jpg"
-    },
-    {
-      "name": "Amit Yadav",
-      "linkedin": "#",
-      "image": "/assets/team/year4/4.jpg"
-    },
-    {
-      "name": "Ravi Kumar",
-      "linkedin": "#",
-      "image": "/assets/team/year4/5.jpg"
-    },
-    {
-      "name": "Pooja Devi",
-      "linkedin": "#",
-      "image": "/assets/team/year4/6.jpg"
-    },
-    {
-      "name": "Arjun Patel",
-      "linkedin": "#",
-      "image": "/assets/team/year4/7.jpg"
-    },
-    {
-      "name": "Meera Joshi",
-      "linkedin": "#",
-      "image": "/assets/team/year4/8.jpg"
-    },
-    {
-      "name": "Nikhil Rao",
-      "linkedin": "#",
-      "image": "/assets/team/year4/9.jpg"
-    },
-    {
-      "name": "Shreya Mishra",
-      "linkedin": "#",
-      "image": "/assets/team/year4/10.jpg"
-    },
-    {
-      "name": "Rahul Gupta",
-      "linkedin": "#",
-      "image": "/assets/team/year4/11.jpg"
-    },
-    {
-      "name": "Simran Kaur",
-      "linkedin": "#",
-      "image": "/assets/team/year4/12.jpg"
-    },
-    {
-      "name": "Deepak Singh",
-      "linkedin": "#",
-      "image": "/assets/team/year4/13.jpg"
-    },
-    {
-      "name": "Ritu Sharma",
-      "linkedin": "#",
-      "image": "/assets/team/year4/14.jpg"
-    },
-    {
-      "name": "Vishal Reddy",
-      "linkedin": "#",
-      "image": "/assets/team/year4/15.jpg"
-    },
-    {
-      "name": "Kavya Nair",
-      "linkedin": "#",
-      "image": "/assets/team/year4/16.jpg"
-    },
-    {
-      "name": "Sanjay Verma",
-      "linkedin": "#",
-      "image": "/assets/team/year4/17.jpg"
-    },
-    {
-      "name": "Ankita Bose",
-      "linkedin": "#",
-      "image": "/assets/team/year4/18.jpg"
-    },
-    {
-      "name": "Manish Tiwari",
-      "linkedin": "#",
-      "image": "/assets/team/year4/19.jpg"
-    },
-    {
-      "name": "Swati Desai",
-      "linkedin": "#",
-      "image": "../../public/assets/image.png"
+      "name": "Vishal Dhiman",
+      "linkedin": "https://www.linkedin.com/in/",
+      "image": "/team/year4/vishal.jpg"
     }
   ]
 }

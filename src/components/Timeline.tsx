@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Trophy, Award, Medal, Star } from 'lucide-react';
 
 const achievements = [
+  { title: '2nd Runner Up', event: 'NIMBUS 2025', icon: Trophy, tier: 'silver' },
   { title: 'Best Project Execution', event: 'NIMBUS 2023', icon: Trophy, tier: 'gold' },
   { title: 'Best Project Execution', event: 'NIMBUS 2021', icon: Trophy, tier: 'gold' },
   { title: 'Best Event Award',       event: 'NIMBUS 2019', icon: Award,  tier: 'silver' },
