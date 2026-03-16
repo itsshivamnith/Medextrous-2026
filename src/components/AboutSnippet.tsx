@@ -1,272 +1,479 @@
-import { motion } from 'framer-motion';
+// components/AboutSnippet.tsx
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { PageHeading } from '@/components/PageHeading';
+import logo1 from '../../public/assets/logo1.png';
 
-const sections = [
-  {
-    tag: 'Our History',
-    color: '#60a5fa',
-    glow: 'rgba(96,165,250,0.15)',
-    border: 'rgba(96,165,250,0.3)',
-    paragraphs: [
-      "Team MEDextrous represents the Department of Mechanical Engineering, NIT Hamirpur in NIMBUS, the college's annual technical fest, since 2010. The team plays a pivotal role in NIMBUS, believing that excellence is an art won by training and habituation.",
-      "MEDextrous has been organizing events that involve leveraging the basics of engineering to make efficient use of available resources. It provides a platform for brilliant minds to showcase their innovative ideas.",
-    ],
-  },
-  {
-    tag: 'Our Vision',
-    color: '#22d3ee',
-    glow: 'rgba(34,211,238,0.15)',
-    border: 'rgba(34,211,238,0.3)',
-    paragraphs: [
-      "The capacity to learn is a gift; the ability to learn is a skill; the willingness to learn is a choice. And when there is a will, there is a way.",
-      "We strive to transform engineering concepts into real-world applications, shaping the future with innovation and excellence in every project we undertake.",
-    ],
-  },
-];
+// ─── Responsive styles injected once ─────────────────────────────────────────
+const styles = `
+  .about-section {
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .about-visual-col {
+      order: -1;
+    }
+    .about-visual-wrap {
+      max-width: 320px !important;
+      margin: 0 auto;
+    }
+    .about-title {
+      font-size: clamp(2rem, 8vw, 3rem) !important;
+    }
+  }
+  @media (max-width: 480px) {
+    .about-section { padding: 3.5rem 0; }
+    .about-inner { padding: 0 1rem; }
+    .about-grid { gap: 2rem; }
+    .about-visual-wrap {
+      max-width: 280px !important;
+    }
+    .about-stats { gap: 1.25rem !important; }
+  }
 
+  /* CTA button */
+  .about-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 26px;
+    border-radius: 14px;
+    border: 1px solid rgba(96,165,250,0.22);
+    background: rgba(96,165,250,0.05);
+    color: rgba(148,187,252,0.85);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.35s, box-shadow 0.35s;
+  }
+  .about-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(115deg, rgba(96,165,250,0.1), rgba(99,102,241,0.07));
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .about-cta:hover::before { opacity: 1; }
+  .about-cta:hover {
+    color: #bfdbfe;
+    border-color: rgba(96,165,250,0.5);
+    box-shadow: 0 0 32px rgba(96,165,250,0.18), 0 8px 28px rgba(0,0,0,0.35);
+  }
+  .about-cta .cta-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 8px;
+    border: 1px solid rgba(96,165,250,0.25);
+    background: rgba(96,165,250,0.08);
+    transition: transform 0.3s, background 0.3s;
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .about-cta:hover .cta-icon {
+    transform: translateX(5px);
+    background: rgba(96,165,250,0.18);
+  }
+  .cta-text { position: relative; z-index: 1; }
+
+  /* Divider between stats */
+  .stat-divider {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, transparent, rgba(96,165,250,0.2), transparent);
+  }
+`;
+
+// ─── 3D Blueprint Visual ──────────────────────────────────────────────────────
+const BlueprintVisual = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-160, 160], [20, -20]), {
+    stiffness: 160, damping: 24,
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-160, 160], [-20, 20]), {
+    stiffness: 160, damping: 24,
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseX.set(e.clientX - rect.left - rect.width / 2);
+    mouseY.set(e.clientY - rect.top - rect.height / 2);
+  };
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  return (
+    <div
+      ref={ref}
+      className="about-visual-wrap relative w-full flex items-center justify-center"
+      style={{ minHeight: 340, perspective: '1000px', maxWidth: 400 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* ambient glow orbs — non-interactive */}
+      <div className="absolute rounded-full pointer-events-none"
+        style={{ width: 300, height: 300, background: 'radial-gradient(circle, rgba(59,130,246,0.12), transparent 70%)', filter: 'blur(30px)' }} />
+      <div className="absolute rounded-full pointer-events-none"
+        style={{ width: 180, height: 180, background: 'radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%)', filter: 'blur(20px)', transform: 'translate(40px, 30px)' }} />
+
+      {/* 3D tilt container */}
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d', width: 320, height: 320 }}
+        className="relative flex items-center justify-center"
+      >
+        <div style={{ width: 320, height: 320, position: 'relative', transformStyle: 'preserve-3d' }}>
+
+          {/* Layer 1 — outermost card panel (deepest) */}
+          <motion.div
+            className="absolute inset-0 rounded-[40px]"
+            style={{
+              background: 'radial-gradient(ellipse at 48% 42%, rgba(25,52,90,0.6), rgba(10,16,38,0.95))',
+              border: '1px solid rgba(96,165,250,0.1)',
+              transform: 'translateZ(-36px)',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.04)',
+            }}
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: [0.22,1,0.36,1] }}
+          />
+
+          {/* Layer 2 — outer dashed orbit (slow clockwise) */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 268, height: 268,
+              top: '50%', left: '50%',
+              marginTop: -134, marginLeft: -134,
+              border: '1px dashed rgba(96,165,250,0.18)',
+              transform: 'translateZ(-18px)',
+            }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 36, repeat: Infinity, ease: 'linear' }}
+          />
+
+          {/* Layer 3 — main large glowing circle */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 226, height: 226,
+              top: '50%', left: '50%',
+              marginTop: -113, marginLeft: -113,
+              background: 'radial-gradient(ellipse at 40% 36%, rgba(59,130,246,0.48), rgba(30,58,138,0.28))',
+              transform: 'translateZ(-8px)',
+            }}
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.15, ease: [0.22,1,0.36,1] }}
+          />
+
+          {/* Layer 4 — inner counter-orbit */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 158, height: 158,
+              top: '50%', left: '50%',
+              marginTop: -79, marginLeft: -79,
+              border: '1px dashed rgba(99,102,241,0.22)',
+              transform: 'translateZ(0px)',
+            }}
+            animate={{ rotate: -360 }}
+            transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
+          />
+
+          {/* Layer 5 — accent glow dots */}
+          <div className="absolute rounded-full"
+            style={{ width: 10, height: 10, top: 30, left: 46, background: 'rgba(129,140,248,0.75)', transform: 'translateZ(10px)', boxShadow: '0 0 10px rgba(129,140,248,0.9), 0 0 20px rgba(99,102,241,0.5)' }} />
+          <div className="absolute rounded-full"
+            style={{ width: 7, height: 7, bottom: 48, left: 26, background: 'rgba(96,165,250,0.65)', transform: 'translateZ(10px)', boxShadow: '0 0 8px rgba(96,165,250,0.8)' }} />
+          <div className="absolute rounded-full"
+            style={{ width: 5, height: 5, top: 58, right: 52, background: 'rgba(165,180,252,0.5)', transform: 'translateZ(10px)', boxShadow: '0 0 6px rgba(165,180,252,0.7)' }} />
+
+          {/* Layer 5 — corner brackets */}
+          <div className="absolute pointer-events-none"
+            style={{ top: 18, left: 18, width: 26, height: 26, borderTop: '1.5px solid rgba(96,165,250,0.55)', borderLeft: '1.5px solid rgba(96,165,250,0.55)', borderRadius: '10px 0 0 0', transform: 'translateZ(12px)' }} />
+          <div className="absolute pointer-events-none"
+            style={{ bottom: 18, right: 18, width: 26, height: 26, borderBottom: '1.5px solid rgba(99,102,241,0.5)', borderRight: '1.5px solid rgba(99,102,241,0.5)', borderRadius: '0 0 10px 0', transform: 'translateZ(12px)' }} />
+          <div className="absolute pointer-events-none"
+            style={{ top: 18, right: 18, width: 16, height: 16, borderTop: '1px solid rgba(96,165,250,0.3)', borderRight: '1px solid rgba(96,165,250,0.3)', borderRadius: '0 10px 0 0', transform: 'translateZ(12px)' }} />
+          <div className="absolute pointer-events-none"
+            style={{ bottom: 18, left: 18, width: 16, height: 16, borderBottom: '1px solid rgba(99,102,241,0.3)', borderLeft: '1px solid rgba(99,102,241,0.3)', borderRadius: '0 0 0 10px', transform: 'translateZ(12px)' }} />
+
+          {/* Layer 6 — MEDEXTROUS watermark */}
+          <div className="absolute pointer-events-none"
+            style={{
+              bottom: 56, left: 0, right: 0, textAlign: 'center',
+              fontSize: 7, letterSpacing: '0.42em', color: 'rgba(165,180,252,0.25)',
+              fontFamily: "'Orbitron', sans-serif",
+              transform: 'translateZ(12px)',
+            }}>
+            MEDEXTROUS
+          </div>
+
+          {/* Layer 7 — pulsing glow ring */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 124, height: 124,
+              top: '50%', left: '50%',
+              marginTop: -62, marginLeft: -62,
+              transform: 'translateZ(22px)',
+              borderRadius: '50%',
+            }}
+            animate={{
+              boxShadow: [
+                '0 0 0 2px rgba(99,102,241,0.28), 0 0 24px rgba(96,165,250,0.18), 0 0 0px rgba(96,165,250,0)',
+                '0 0 0 2.5px rgba(99,102,241,0.7), 0 0 48px rgba(96,165,250,0.5), 0 0 80px rgba(99,102,241,0.2)',
+                '0 0 0 2px rgba(99,102,241,0.28), 0 0 24px rgba(96,165,250,0.18), 0 0 0px rgba(96,165,250,0)',
+              ]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          />
+
+          {/* Layer 8 — outer rotating ring around logo */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 130, height: 130,
+              top: '50%', left: '50%',
+              marginTop: -65, marginLeft: -65,
+              border: '1.5px solid rgba(96,165,250,0.35)',
+              borderTopColor: 'rgba(99,102,241,0.7)',
+              borderRightColor: 'rgba(96,165,250,0.2)',
+              transform: 'translateZ(26px)',
+            }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+          />
+
+          {/* Layer 8b — inner counter-rotating ring */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 122, height: 122,
+              top: '50%', left: '50%',
+              marginTop: -61, marginLeft: -61,
+              border: '1px dashed rgba(165,180,252,0.25)',
+              transform: 'translateZ(27px)',
+            }}
+            animate={{ rotate: -360 }}
+            transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
+          />
+
+          {/* Layer 9 — logo1.png — centered with margin, 3D hover lift */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: 108, height: 108,
+              top: '50%', left: '50%',
+              marginTop: -54, marginLeft: -54,
+              transform: 'translateZ(34px)',
+              padding: 4,
+              background: 'radial-gradient(135deg, rgba(99,102,241,0.35), rgba(59,130,246,0.2))',
+              boxShadow: '0 0 0 1.5px rgba(99,102,241,0.4)',
+              borderRadius: '50%',
+              cursor: 'pointer',
+            }}
+            whileHover={{
+              scale: 1.18,
+              z: 60,
+              boxShadow: '0 0 0 2px rgba(96,165,250,0.9), 0 0 40px rgba(96,165,250,0.6), 0 20px 50px rgba(0,0,0,0.5)',
+              transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+            }}
+          >
+            {/* actual logo image with margin via padding on parent */}
+            <div className="w-full h-full rounded-full overflow-hidden">
+              <img
+                src={logo1}
+                alt="MEDextrous Logo"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '50%' }}
+              />
+            </div>
+            {/* gloss overlay */}
+            <div className="absolute inset-0 rounded-full pointer-events-none"
+              style={{ background: 'radial-gradient(circle at 32% 28%, rgba(255,255,255,0.1), transparent 60%)' }} />
+          </motion.div>
+
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+// ─── AboutSnippet ─────────────────────────────────────────────────────────────
 export const AboutSnippet = () => (
-  <section style={{ padding: '5rem 0', position: 'relative', overflow: 'hidden' }}>
+  <section className="about-section">
+    <style>{styles}</style>
 
-    {/* Background orbs */}
-    <div style={{
-      position: 'absolute', top: '30%', left: '20%',
-      width: 400, height: 300, borderRadius: '50%',
-      background: 'rgba(79,70,229,0.06)', filter: 'blur(100px)', pointerEvents: 'none',
-    }} />
-    <div style={{
-      position: 'absolute', bottom: '20%', right: '15%',
-      width: 300, height: 200, borderRadius: '50%',
-      background: 'rgba(34,211,238,0.04)', filter: 'blur(80px)', pointerEvents: 'none',
-    }} />
+    {/* bg atmosphere */}
+    <div className="absolute pointer-events-none"
+      style={{ top: '20%', left: '-5%', width: 520, height: 400, borderRadius: '50%', background: 'rgba(59,130,246,0.04)', filter: 'blur(120px)' }} />
+    <div className="absolute pointer-events-none"
+      style={{ bottom: '5%', right: '-5%', width: 420, height: 320, borderRadius: '50%', background: 'rgba(99,102,241,0.05)', filter: 'blur(100px)' }} />
 
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 1.5rem' }}>
-
+    <div className="about-inner relative">
       <PageHeading title="About Us" />
 
-      {/* Cards grid */}
-      <div
-        className="about-snippet-grid"
-        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}
-      >
-        <style>{`
-          @media (max-width: 768px) {
-            .about-snippet-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
+      <div className="about-grid">
 
-        {sections.map((section, si) => (
-          <motion.div
-            key={section.tag}
-            initial={{ opacity: 0, y: 40, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, delay: si * 0.15, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ y: -6, transition: { duration: 0.3 } }}
-            style={{
-              borderRadius: 24,
-              border: '1px solid rgba(71,85,105,0.4)',
-              background: 'linear-gradient(135deg, rgba(15,23,42,0.97), rgba(30,41,59,0.6), rgba(2,6,23,0.95))',
-              backdropFilter: 'blur(24px)',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.45)',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            {/* Top shimmer sweep */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: si * 0.15 + 0.2 }}
-              style={{
-                position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-                background: `linear-gradient(to right, transparent, ${section.color}, transparent)`,
-                transformOrigin: 'left',
-                opacity: 0.5,
-              }}
-            />
-
-            {/* Animated corner — top left */}
-            <motion.div
-              initial={{ width: 0, height: 0 }}
-              whileInView={{ width: 36, height: 36 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: si * 0.15 + 0.3 }}
-              style={{
-                position: 'absolute', top: 0, left: 0,
-                borderTop: `1.5px solid ${section.color}80`,
-                borderLeft: `1.5px solid ${section.color}80`,
-                borderRadius: '24px 0 0 0',
-              }}
-            />
-
-            {/* Animated corner — bottom right */}
-            <motion.div
-              initial={{ width: 0, height: 0 }}
-              whileInView={{ width: 36, height: 36 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: si * 0.15 + 0.35 }}
-              style={{
-                position: 'absolute', bottom: 0, right: 0,
-                borderBottom: `1.5px solid ${section.color}80`,
-                borderRight: `1.5px solid ${section.color}80`,
-                borderRadius: '0 0 24px 0',
-              }}
-            />
-
-            {/* Hover glow */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-              style={{
-                position: 'absolute', inset: 0,
-                background: `radial-gradient(ellipse at top left, ${section.glow}, transparent 70%)`,
-                pointerEvents: 'none',
-              }}
-            />
-
-            {/* Card content */}
-            <div style={{ padding: '2rem' }}>
-
-              {/* Tag row */}
-              <motion.div
-                initial={{ opacity: 0, x: -12 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: si * 0.15 + 0.2 }}
-                style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.25rem' }}
-              >
-                {/* Pulsing dot */}
-                <motion.div
-                  animate={{ scale: [1, 1.35, 1], opacity: [0.7, 1, 0.7] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: si * 0.5 }}
-                  style={{
-                    width: 8, height: 8, borderRadius: '50%',
-                    background: section.color,
-                    boxShadow: `0 0 8px ${section.color}, 0 0 16px ${section.glow}`,
-                    flexShrink: 0,
-                  }}
-                />
-                <span style={{
-                  fontSize: 10, letterSpacing: '0.3em', textTransform: 'uppercase',
-                  fontWeight: 700, color: section.color,
-                  padding: '3px 10px', borderRadius: 999,
-                  border: `1px solid ${section.border}`,
-                  background: section.glow,
-                }}>
-                  {section.tag}
-                </span>
-              </motion.div>
-
-              {/* Paragraphs */}
-              <div style={{ paddingLeft: '1rem', borderLeft: `2px solid ${section.border}` }}>
-                {section.paragraphs.map((para, pi) => (
-                  <motion.p
-                    key={pi}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.55, delay: si * 0.15 + pi * 0.12 + 0.3 }}
-                    style={{
-                      color: pi === 0 ? 'rgba(203,213,225,0.85)' : 'rgba(148,163,184,0.65)',
-                      fontSize: '0.88rem',
-                      lineHeight: 1.9,
-                      margin: pi > 0 ? '0.75rem 0 0' : 0,
-                      textAlign: 'justify',
-                    }}
-                  >
-                    {para}
-                  </motion.p>
-                ))}
-              </div>
-            </div>
-
-            {/* Bottom shimmer */}
-            <div style={{
-              position: 'absolute', bottom: 0, left: 24, right: 24, height: 1,
-              background: 'linear-gradient(to right, transparent, rgba(71,85,105,0.2), transparent)',
-            }} />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Explore button — below cards, full width */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.35 }}
-      >
-        <Link
-          to="/about"
-          className="group relative flex items-center gap-4 md:gap-8 py-5 px-6 overflow-hidden transition-all duration-400"
-          style={{
-            borderRadius: 16,
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(96,165,250,0.1)',
-            textDecoration: 'none',
-            display: 'flex',
-          }}
+        {/* ── LEFT: text content ── */}
+        <motion.div
+          initial={{ opacity: 0, x: -36 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Hover background sweep */}
-          <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            style={{
-              background: 'linear-gradient(120deg, rgba(96,165,250,0.07) 0%, rgba(99,102,241,0.04) 60%, transparent 100%)',
-            }}
-          />
-
-          {/* Left blue accent line on hover */}
-          <div
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 rounded-full bg-gradient-to-b from-blue-400/0 via-blue-400 to-blue-400/0 transition-all duration-500 opacity-0 group-hover:opacity-100"
-            style={{ height: '65%' }}
-          />
-
-          {/* Icon box */}
-          <div
-            className="relative flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-400 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(96,165,250,0.25)]"
-            style={{
-              border: '1px solid rgba(96,165,250,0.2)',
-              background: 'rgba(96,165,250,0.06)',
-            }}
+          {/* title */}
+          <h2
+            className="about-title font-black tracking-tight leading-[1.08] mb-7"
+            style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)' }}
           >
-            <ArrowRight className="w-5 h-5" style={{ color: '#60a5fa' }} />
-          </div>
+            <span style={{ color: 'rgba(224,231,255,0.92)' }}>Team</span>
+            <br />
+            <span style={{
+              background: 'linear-gradient(110deg, #60a5fa 0%, #818cf8 50%, #a78bfa 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              MEDextrous
+            </span>
+          </h2>
 
-          {/* Text */}
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <h3
-              className="text-base md:text-lg font-black tracking-wide mb-0.5 text-white/80 group-hover:text-white transition-colors duration-300"
-              style={{ fontFamily: "'Orbitron', sans-serif" }}
-            >
-              Our Full Story
-            </h3>
-            <p
-              className="text-xs text-white/35 group-hover:text-white/50 transition-colors duration-300 leading-relaxed"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Mechanical Engineering Club · NIT Hamirpur
-            </p>
-          </div>
-
-          {/* Explore pill */}
-          <div
-            className="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-semibold tracking-[0.15em] uppercase transition-all duration-400 group-hover:border-blue-400/50 group-hover:text-blue-200 group-hover:bg-blue-400/10"
+          {/* para 1 */}
+          <motion.p
+            className="text-justify mb-5"
             style={{
-              color: 'rgba(96,165,250,0.5)',
-              borderColor: 'rgba(96,165,250,0.15)',
               fontFamily: "'DM Sans', sans-serif",
+              fontSize: 'clamp(0.9rem, 1.6vw, 1rem)',
+              lineHeight: 1.95,
+              color: 'rgba(203,213,225,0.72)',
             }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Explore
-            <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
-          </div>
-        </Link>
-      </motion.div>
+            Since 2010, Team MEDextrous has proudly represented NIT Hamirpur's Department of
+            Mechanical Engineering at NIMBUS — the college's annual technical fest. We believe
+            excellence is an art won by training, habituation, and the relentless drive to push
+            engineering beyond its known limits.
+          </motion.p>
 
+          {/* para 2 */}
+          <motion.p
+            className="text-justify mb-10"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 'clamp(0.9rem, 1.6vw, 1rem)',
+              lineHeight: 1.95,
+              color: 'rgba(148,163,184,0.6)',
+            }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.32 }}
+          >
+            Our vision is to transform engineering concepts into impactful real-world applications —
+            creating a platform where brilliant minds showcase innovative ideas, and the willingness
+            to learn becomes the foundation for lasting excellence and meaningful impact.
+          </motion.p>
+
+          {/* stats row */}
+          <motion.div
+            className="about-stats flex items-center mb-10"
+            style={{ gap: '1.75rem' }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.42 }}
+          >
+            {[
+              { value: '14+', label: 'Years Active' },
+              { value: 'NIMBUS', label: 'Annual Fest' },
+              { value: 'NIT-H', label: 'Campus' },
+            ].map((s, i) => (
+              <>
+                {i > 0 && <div key={`div-${i}`} className="stat-divider" />}
+                <div key={i} className="flex flex-col gap-1">
+                  <span
+                    className="font-black leading-none"
+                    style={{
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
+                      background: 'linear-gradient(120deg, #e0e7ff, #a5b4fc)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >{s.value}</span>
+                  <span
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 9,
+                      letterSpacing: '0.28em',
+                      textTransform: 'uppercase',
+                      color: 'rgba(148,163,184,0.4)',
+                    }}
+                  >{s.label}</span>
+                </div>
+              </>
+            ))}
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.52 }}
+          >
+            <Link to="/about" className="about-cta">
+              <span className="cta-text">Discover Our Story</span>
+              <span className="cta-icon"><ArrowRight size={14} /></span>
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* ── RIGHT: 3D visual ── */}
+        <motion.div
+          className="about-visual-col flex items-center justify-center"
+          initial={{ opacity: 0, x: 36, scale: 0.94 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+        >
+          <BlueprintVisual />
+        </motion.div>
+
+      </div>
     </div>
   </section>
 );

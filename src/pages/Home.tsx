@@ -9,6 +9,7 @@ import { AboutSnippet } from '@/components/AboutSnippet';
 import { Counter } from '@/components/Counter';
 import { GalleryGrid } from '@/components/GalleryPhoto';
 import { CoordinatorCard } from '@/components/CoordinatorCard';
+import { FacultyInchargeCard } from '@/components/FacultyInchargeCard';
 import { Particle } from '@/components/Particle';
 import { GridLines } from '@/components/GridLines';
 import { HeroLogos } from '@/components/HeroLogos';
@@ -17,7 +18,7 @@ import { HeroScrollIndicator } from '@/components/HeroScrollIndicator';
 import { StatCard } from '@/components/StatCard';
 import { FeatureRow } from '@/components/FeatureRow';
 
-import { features, stats, coordinators } from '@/data/homeData';
+import { features, stats, coordinators, facultyIncharge } from '@/data/homeData';
 
 if (typeof document !== 'undefined') {
   const l = document.createElement('link');
@@ -35,6 +36,8 @@ const galleryItems = [
   { src: '/assets/gallery/g6.jpg', caption: '', rotate: 0 },
   { src: '/assets/gallery/g7.jpg', caption: '', rotate: 0 },
   { src: '/assets/gallery/g8.jpg', caption: '', rotate: 0 },
+  { src: '/assets/gallery/g9.jpg', caption: '', rotate: 0 },
+  { src: '/assets/gallery/g10.jpg', caption: '', rotate: 0 },
 ];
 
 const PARTICLES = [
@@ -126,14 +129,7 @@ const Home = () => {
             <div className="h-px w-24 bg-gradient-to-l from-transparent to-blue-400/60" />
           </motion.div>
 
-          <motion.p
-            className="text-base md:text-lg text-white/40 tracking-[0.2em] uppercase mb-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            NIT Hamirpur
-          </motion.p>
+         
 
           <motion.p
             className="text-sm md:text-base text-white/25 max-w-sm mx-auto leading-relaxed mb-10 tracking-wide"
@@ -164,25 +160,6 @@ const Home = () => {
 
           
         </motion.div>
-      </section>
-
-      {/* ══ ABOUT STRIP ════════════════════════════════════════════════════════ */}
-      <section className="py-16 border-y border-white/5 bg-white/[0.01]">
-        <div className="container mx-auto px-4">
-          <motion.p
-            className="text-center text-xl md:text-3xl font-light text-white/55 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
-            We are the engineers of tomorrow —{' '}
-            <span style={{ color: '#818cf8' }} className="font-semibold">designing, building</span>{' '}
-            and{' '}
-            <span style={{ color: '#60a5fa' }} className="font-semibold">innovating</span>{' '}
-            at the intersection of mechanics and technology.
-          </motion.p>
-        </div>
       </section>
 
       {/* ══ STATS ══════════════════════════════════════════════════════════════ */}
@@ -217,6 +194,20 @@ const Home = () => {
       </section>
       
       <AboutSnippet />
+
+
+       {/* ══ CLUB COORDINATORS ══════════════════════════════════════════════════ */}
+      <section className="py-28 relative">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-[500px] h-[400px] rounded-full bg-indigo-600/6 blur-[120px]" />
+        </div>
+        <div className="container mx-auto px-4">
+          <PageHeading title="Faculty In-charge" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
+            <FacultyInchargeCard designation={facultyIncharge.designation} department={facultyIncharge.department} key={facultyIncharge.name} {...facultyIncharge} delay={0} />
+          </div>
+        </div>
+      </section>
       
       
       {/* ══ GALLERY ════════════════════════════════════════════════════════════ */}

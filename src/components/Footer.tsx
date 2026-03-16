@@ -60,13 +60,13 @@ const Footer = () => {
 
         {/* Social icons */}
         <div className="flex justify-center items-center gap-8">
-          <a href="#" className="w-12 h-12 bg-white/10 backdrop-blur hover:bg-gradient-to-br hover:from-blue-500 hover:to-blue-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/40 shadow-md border border-white/20 hover:border-blue-400/50 group p-1">
+          <a href="https://www.linkedin.com/company/medextrous/" className="w-12 h-12 bg-white/10 backdrop-blur hover:bg-gradient-to-br hover:from-blue-500 hover:to-blue-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/40 shadow-md border border-white/20 hover:border-blue-400/50 group p-1">
             <Linkedin className="w-5 h-5 text-white drop-shadow group-hover:scale-110 transition-transform duration-300" />
           </a>
-          <a href="#" className="w-12 h-12 bg-white/10 backdrop-blur hover:bg-gradient-to-br hover:from-gray-600 hover:to-gray-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl shadow-md border border-white/20 group p-1">
+          <a href="https://github.com/medextrous" className="w-12 h-12 bg-white/10 backdrop-blur hover:bg-gradient-to-br hover:from-gray-600 hover:to-gray-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl shadow-md border border-white/20 group p-1">
             <Github className="w-5 h-5 text-white drop-shadow group-hover:scale-110 transition-transform duration-300" />
           </a>
-          <a href="#" className="w-12 h-12 bg-white/10 backdrop-blur hover:bg-gradient-to-br hover:from-pink-500 hover:to-purple-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-pink-500/40 shadow-md border border-white/20 hover:border-pink-400/50 group p-1">
+          <a href="https://www.instagram.com/medextrous/" className="w-12 h-12 bg-white/10 backdrop-blur hover:bg-gradient-to-br hover:from-pink-500 hover:to-purple-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-pink-500/40 shadow-md border border-white/20 hover:border-pink-400/50 group p-1">
             <Instagram className="w-5 h-5 text-white drop-shadow group-hover:scale-110 transition-transform duration-300" />
           </a>
         </div>

@@ -82,7 +82,7 @@ const Contact = () => {
             <div className="flex flex-col gap-3">
               {[
                 { icon: Mail,   label: 'Email',    value: 'medextrous@nith.ac.in' },
-                { icon: Phone,  label: 'Phone',    value: '+91 98765 43210' },
+                { icon: Phone,  label: 'Phone',    value: '+91 8628876314' },
                 { icon: MapPin, label: 'Location', value: 'NIT Hamirpur, Himachal Pradesh 177005' },
               ].map(({ icon: Icon, label, value }, i) => (
                 <motion.div

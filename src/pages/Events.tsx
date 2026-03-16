@@ -12,10 +12,10 @@ interface EventCard {
 }
 
 const events: EventCard[] = [
-  { title: 'Splash Jet', date: 'March 2026', image: e1},
-  { title: 'Bhram', date: 'April 2026', image: e2},
-  { title: 'Scavenger Hunt', date: 'May 2026', image: e3},
-  { title: 'Splash Jet', date: 'March 2025', image: e4},
+  { title: 'Mech Day', date: 'March 2025', image: e2},
+  { title: 'Escape The Hunt', date: 'April 2025', image: e1},
+  { title: 'Clean The Peaks Drive', date: 'April 2025', image: e3},
+  { title: 'Treasure Hunt', date: 'March 2025', image: e4},
 ];
 
 const PageHeading = ({ title }: { title: string }) => (
