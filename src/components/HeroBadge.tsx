@@ -17,7 +17,7 @@ export const HeroBadge = () => (
       }}
     >
       <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: '#60a5fa' }} />
-      Mechanical Engineering Nimbus Club
+      Departmental Club of Mechanical Engineering
       <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: '#60a5fa' }} />
     </span>
   </motion.div>

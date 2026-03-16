@@ -4,6 +4,10 @@ import { motion } from 'framer-motion';
 import { CalendarDays } from 'lucide-react';
 import e3 from '../../public/assets/event/e3.jpg';
 import e4 from '../../public/assets/event/e4.jpg';
+import e5 from '../../public/assets/event/e5.jpg';
+import e6 from '../../public/assets/event/e6.jpg';
+import e7 from '../../public/assets/event/e7.jpg';
+import e8 from '../../public/assets/event/e8.jpg';
 
 interface EventCard {
   title: string;
@@ -12,10 +16,14 @@ interface EventCard {
 }
 
 const events: EventCard[] = [
+  { title: 'Motion Gen', date: 'March 2026', image: e5},
   { title: 'Mech Day', date: 'March 2025', image: e2},
   { title: 'Escape The Hunt', date: 'April 2025', image: e1},
   { title: 'Clean The Peaks Drive', date: 'April 2025', image: e3},
-  { title: 'Treasure Hunt', date: 'March 2025', image: e4},
+  { title: 'Bingo Bash', date: 'April 2025', image: e6},
+  { title: 'Exploring Robotics', date: 'March 2025', image: e7},
+  { title: 'RC Car Race', date: 'April 2025', image: e8},
+  { title: 'Treasure Hunt', date: 'March 2024', image: e4},
 ];
 
 const PageHeading = ({ title }: { title: string }) => (

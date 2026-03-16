@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import p1 from '../../public/assets/project/p1.jpg';
 import p2 from '../../public/assets/project/p2.jpg';
 import p3 from '../../public/assets/project/p3.jpg';
-import p4 from '../../public/assets/project/p4.jpg';
 import p5 from '../../public/assets/project/p5.jpg';
 import p6 from '../../public/assets/project/p6.jpg';
 import p7 from '../../public/assets/project/p7.jpg';
@@ -12,6 +11,8 @@ import p10 from '../../public/assets/project/p10.jpg';
 import p13 from '../../public/assets/project/p13.jpg';
 import p11 from '../../public/assets/project/p11.jpg';
 import p12 from '../../public/assets/project/p12.jpg';
+import p14 from '../../public/assets/project/p14.jpg';
+import p15 from '../../public/assets/project/p15.jpg';
 
 
 
@@ -34,6 +35,8 @@ const projects: Project[] = [
   { title: 'Unmanned Group Vehicle', image: p13, proposedBy: 'Peeyush, Prabhat, Sangam' },
   { title: 'Ionic Thruster', image: p11, proposedBy: 'Shwetansh, Sparsh' },
   { title: 'Tree Power', image: p12, proposedBy: 'Anjani, Sakshi' },
+  { title: 'Fire Eye Inferno', image: p14, proposedBy: 'Shwetansh, Sparsh' },
+  { title: 'Atmospheric Power Battery', image: p15, proposedBy: 'Anshvi, Vikas' },
 ];
 
 const PageHeading = ({ title }: { title: string }) => (

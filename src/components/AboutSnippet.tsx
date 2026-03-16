@@ -479,3 +479,4 @@ export const AboutSnippet = () => (
 );
 
 export default AboutSnippet;
+

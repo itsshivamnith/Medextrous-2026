@@ -33,6 +33,6 @@ export const facultyIncharge = {
   designation: "Faculty In-charge",
   department: "Mechanical Engineering",
   email: "psingh@nith.ac.in",
-  linkedin: "https://linkedin.com/in/param-singh",
+  linkedin: "https://linkedin.com/in/",
   image: "../assets/param.jpg",
 };

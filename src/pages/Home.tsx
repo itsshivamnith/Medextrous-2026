@@ -51,6 +51,88 @@ const PARTICLES = [
   { delay: 2.5, x: '45%', size: 2, duration: 14 },
 ];
 
+// ── Letter-by-letter animated heading ────────────────────────────────────────
+const HEADING_TEXT = 'MEDextrous';
+
+const letterVariants = {
+  hidden: { opacity: 0, y: 40, rotateX: -90, filter: 'blur(8px)' },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.55,
+      delay: 0.3 + i * 0.07,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+// Glitch flash effect on individual letters after they appear
+const GlitchLetter = ({ char, index }: { char: string; index: number }) => {
+  const [glitch, setGlitch] = useState(false);
+
+  useEffect(() => {
+    // Random glitch flashes after initial animation
+    const timeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        if (Math.random() > 0.85) {
+          setGlitch(true);
+          setTimeout(() => setGlitch(false), 80);
+        }
+      }, 2000 + index * 300);
+      return () => clearInterval(interval);
+    }, 2000 + index * 200);
+    return () => clearTimeout(timeout);
+  }, [index]);
+
+  return (
+    <motion.span
+      custom={index}
+      variants={letterVariants}
+      initial="hidden"
+      animate="visible"
+      style={{
+        display: 'inline-block',
+        transformOrigin: 'bottom center',
+        perspective: '400px',
+        position: 'relative',
+        color: glitch ? '#a5b4fc' : '#60a5fa',
+        textShadow: glitch
+          ? '2px 0 #f472b6, -2px 0 #34d399, 0 0 30px rgba(165,180,252,0.8)'
+          : '0 0 60px rgba(96,165,250,0.4), 0 0 120px rgba(99,102,241,0.2)',
+        WebkitTextStroke: '2px #1d4ed8',
+        transition: glitch ? 'none' : 'color 0.15s, text-shadow 0.15s',
+      }}
+    >
+      {char}
+    </motion.span>
+  );
+};
+
+// ── Animated scan line that sweeps across the heading ────────────────────────
+const ScanLine = () => (
+  <motion.div
+    className="absolute inset-0 pointer-events-none overflow-hidden"
+    style={{ borderRadius: 4 }}
+  >
+    <motion.div
+      style={{
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        width: 2,
+        background: 'linear-gradient(to bottom, transparent, rgba(96,165,250,0.7), transparent)',
+        filter: 'blur(1px)',
+      }}
+      initial={{ left: '-2%', opacity: 0 }}
+      animate={{ left: ['−2%', '102%'], opacity: [0, 1, 1, 0] }}
+      transition={{ duration: 1.2, delay: 1.6, ease: 'easeInOut', repeat: Infinity, repeatDelay: 6 }}
+    />
+  </motion.div>
+);
+
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
@@ -67,9 +149,26 @@ const Home = () => {
     >
       {/* ══ HERO ═══════════════════════════════════════════════════════════════ */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+        {/* Deep background radial glow */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[700px] h-[700px] rounded-full bg-indigo-600/10 blur-[140px]" />
         </div>
+
+        {/* Secondary glow — gives depth */}
+        <motion.div
+          className="absolute pointer-events-none"
+          style={{
+            top: '30%', left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 500, height: 300,
+            borderRadius: '50%',
+            background: 'radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+          }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+        />
 
         <GridLines />
 
@@ -77,19 +176,32 @@ const Home = () => {
           {PARTICLES.map((p, i) => <Particle key={i} {...p} />)}
         </div>
 
-        {/* Corner decorations */}
-        <div className="absolute top-8 left-8 pointer-events-none opacity-20">
-          <div className="w-8 h-8 border-t border-l border-blue-400/60" />
-        </div>
-        <div className="absolute top-8 right-8 pointer-events-none opacity-20">
-          <div className="w-8 h-8 border-t border-r border-blue-400/60" />
-        </div>
-        <div className="absolute bottom-8 left-8 pointer-events-none opacity-20">
-          <div className="w-8 h-8 border-b border-l border-indigo-400/60" />
-        </div>
-        <div className="absolute bottom-8 right-8 pointer-events-none opacity-20">
-          <div className="w-8 h-8 border-b border-r border-indigo-400/60" />
-        </div>
+        {/* Corner decorations — enhanced */}
+        {[
+          { top: 8, left: 8, borderT: true, borderL: true },
+          { top: 8, right: 8, borderT: true, borderR: true },
+          { bottom: 8, left: 8, borderB: true, borderL: true },
+          { bottom: 8, right: 8, borderB: true, borderR: true },
+        ].map((c, i) => (
+          <motion.div
+            key={i}
+            className="absolute pointer-events-none"
+            style={{
+              ...(c.top !== undefined ? { top: `${c.top * 4}px` } : {}),
+              ...(c.bottom !== undefined ? { bottom: `${c.bottom * 4}px` } : {}),
+              ...(c.left !== undefined ? { left: `${c.left * 4}px` } : {}),
+              ...(c.right !== undefined ? { right: `${c.right * 4}px` } : {}),
+              width: 32, height: 32,
+              borderTop: c.borderT ? '1.5px solid rgba(96,165,250,0.35)' : 'none',
+              borderBottom: c.borderB ? '1.5px solid rgba(99,102,241,0.35)' : 'none',
+              borderLeft: c.borderL ? '1.5px solid rgba(96,165,250,0.35)' : 'none',
+              borderRight: c.borderR ? '1.5px solid rgba(99,102,241,0.35)' : 'none',
+            }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
+          />
+        ))}
 
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
@@ -98,47 +210,107 @@ const Home = () => {
           <HeroLogos />
           <HeroBadge />
 
-          {/* Heading */}
-          <motion.h1
-            className="font-black tracking-tight mb-2 leading-none"
-            style={{
-              fontFamily: "'Orbitron', sans-serif",
-              fontSize: 'clamp(3.5rem, 12vw, 9rem)',
-              WebkitTextStroke: '2px #1d4ed8',
-              color: '#60a5fa',
-              textShadow: '0 0 60px rgba(96,165,250,0.3), 0 0 120px rgba(99,102,241,0.15)',
-            }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15 }}
-          >
-            MEDextrous
-          </motion.h1>
+          {/* ── Letter-by-letter heading ── */}
+          <div className="relative inline-block mb-2">
+            <ScanLine />
+            <motion.h1
+              className="font-black tracking-tight leading-none"
+              style={{
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: 'clamp(3.5rem, 12vw, 9rem)',
+                letterSpacing: '-0.02em',
+              }}
+              aria-label="MEDextrous"
+            >
+              {HEADING_TEXT.split('').map((char, i) => (
+                <GlitchLetter key={i} char={char} index={i} />
+              ))}
+            </motion.h1>
 
-          {/* Scan line */}
+            {/* Reflection / echo below heading */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                bottom: -4,
+                left: 0,
+                right: 0,
+                height: '40%',
+                background: 'linear-gradient(to bottom, rgba(96,165,250,0.06), transparent)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+                transform: 'scaleY(-1)',
+                pointerEvents: 'none',
+                fontSize: 'clamp(3.5rem, 12vw, 9rem)',
+                fontFamily: "'Orbitron', sans-serif",
+                fontWeight: 900,
+                color: 'rgba(96,165,250,0.08)',
+                WebkitTextStroke: '1px rgba(96,165,250,0.08)',
+                lineHeight: 1,
+                userSelect: 'none',
+              }}
+            >
+              MEDextrous
+            </div>
+          </div>
+
+          {/* Animated scan line divider */}
           <motion.div
             className="flex items-center justify-center gap-3 mb-5"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 1, delay: 1.1 }}
           >
-            <div className="h-px w-24 bg-gradient-to-r from-transparent to-indigo-400/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
-            <div className="h-px w-48 bg-gradient-to-r from-indigo-400/60 to-blue-400/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-            <div className="h-px w-24 bg-gradient-to-l from-transparent to-blue-400/60" />
+            <motion.div
+              className="h-px bg-gradient-to-r from-transparent to-indigo-400/60"
+              style={{ width: 96 }}
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+            <motion.div
+              className="w-1.5 h-1.5 rounded-full bg-indigo-400"
+              animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <motion.div
+              className="h-px bg-gradient-to-r from-indigo-400/60 to-blue-400/60"
+              style={{ width: 192 }}
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
+            />
+            <motion.div
+              className="w-1.5 h-1.5 rounded-full bg-blue-400"
+              animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+            />
+            <motion.div
+              className="h-px bg-gradient-to-l from-transparent to-blue-400/60"
+              style={{ width: 96 }}
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 0.8 }}
+            />
           </motion.div>
 
-         
-
+          {/* Subtitle — word by word */}
           <motion.p
             className="text-sm md:text-base text-white/25 max-w-sm mx-auto leading-relaxed mb-10 tracking-wide"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
+            transition={{ duration: 0.8, delay: 1.3 }}
           >
-            Engineering innovation through design, builds & collaboration
+            {'Engineering innovation through design, builds & collaboration'
+              .split(' ')
+              .map((word, i) => (
+                <motion.span
+                  key={i}
+                  style={{ display: 'inline-block', marginRight: '0.28em' }}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.3 + i * 0.06 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
           </motion.p>
 
           {/* CTA */}
@@ -146,7 +318,7 @@ const Home = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.65 }}
+            transition={{ duration: 0.8, delay: 1.55 }}
           >
             <Button variant="hero" size="lg" asChild>
               <Link to="/projects">View Projects</Link>
@@ -157,8 +329,6 @@ const Home = () => {
           </motion.div>
 
           <HeroScrollIndicator />
-
-          
         </motion.div>
       </section>
 
@@ -192,11 +362,10 @@ const Home = () => {
           </div>
         </div>
       </section>
-      
+
       <AboutSnippet />
 
-
-       {/* ══ CLUB COORDINATORS ══════════════════════════════════════════════════ */}
+      {/* ══ FACULTY IN-CHARGE ══════════════════════════════════════════════════ */}
       <section className="py-28 relative">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[500px] h-[400px] rounded-full bg-indigo-600/6 blur-[120px]" />
@@ -208,8 +377,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      
-      
+
       {/* ══ GALLERY ════════════════════════════════════════════════════════════ */}
       <section className="py-28 relative overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-indigo-700/5 blur-[120px] pointer-events-none" />
